@@ -23,9 +23,7 @@ class M_Retail extends CI_Model
     {
         $data = $this->db->select('*')
             ->from($this->table_retail)
-            ->join($this->table_kecamatan, 'tb_retail.kecamatan_id = tb_kecamatan.kecamatan_id', 'left')
             ->join($this->table_jeruk, 'tb_retail.id_jeruk = tb_jeruk.id_jeruk', 'left')
-            ->join($this->table_kelurahan, 'tb_retail.kelurahan_id = tb_kelurahan.kelurahan_id', 'left')
             ->order_by($this->id_retail, $this->order_retail)
             ->get()
             ->result();
@@ -36,9 +34,7 @@ class M_Retail extends CI_Model
     {
         $data = $this->db->select('*')
             ->from($this->table_retail)
-            ->join($this->table_kecamatan, 'tb_retail.kecamatan_id = tb_kecamatan.kecamatan_id', 'left')
             ->join($this->table_jeruk, 'tb_retail.id_jeruk = tb_jeruk.id_jeruk', 'left')
-            ->join($this->table_kelurahan, 'tb_retail.kelurahan_id = tb_kelurahan.kelurahan_id', 'left')
             ->order_by($this->id_retail, $this->order_retail)
             ->get()
             ->result_array();
@@ -49,9 +45,7 @@ class M_Retail extends CI_Model
     {
         $data = $this->db->select('*')
             ->from($this->table_retail)
-            ->join($this->table_kecamatan, 'tb_retail.kecamatan_id = tb_kecamatan.kecamatan_id', 'left')
             ->join($this->table_jeruk, 'tb_retail.id_jeruk = tb_jeruk.id_jeruk', 'left')
-            ->join($this->table_kelurahan, 'tb_retail.kelurahan_id = tb_kelurahan.kelurahan_id', 'left')
             ->where('tb_retail.kecamatan_id','tb_retail.id_jeruk','tb_retail.kelurahan_id', $cari)
             ->order_by($this->id_retail, $this->order_retail)
             ->get()
@@ -62,15 +56,35 @@ class M_Retail extends CI_Model
     {
         $data = $this->db->select('*')
             ->from($this->table_retail)
-            ->join($this->table_kecamatan, 'tb_retail.kecamatan_id = tb_kecamatan.kecamatan_id', 'left')
             ->join($this->table_jeruk, 'tb_retail.id_jeruk = tb_jeruk.id_jeruk', 'left')
-            ->join($this->table_kelurahan, 'tb_retail.kelurahan_id = tb_kelurahan.kelurahan_id', 'left')
             ->where($this->id_retail, $id)
             ->order_by($this->id_retail, $this->order_retail)
             ->get()
             ->row();
         return $data;
     }
+    function get_by_retail($id)
+    {
+        $data = $this->db->select('*')
+            ->from($this->table_retail)
+            ->join($this->table_jeruk, 'tb_retail.id_jeruk = tb_jeruk.id_jeruk', 'left')
+            ->where($this->id_retail, $id)
+            ->order_by($this->id_retail, $this->order_retail)
+            ->get()
+            ->result();
+        return $data;
+    }
+
+    public function detail_retail($id_retail)
+	{
+        $data = $this->db->select('*')
+            ->from($this->table_retail)
+            ->join($this->table_jeruk, 'tb_retail.id_jeruk = tb_jeruk.id_jeruk', 'left')
+            ->where($this->id_retail, $id_retail)
+            ->get()
+            ->row();
+        return $data;
+	}
 
     public function getResult()
     {

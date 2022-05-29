@@ -22,6 +22,7 @@ class Dashboard extends CI_Controller {
         $kecamatan1 = $this->kecamatan->get_total();
         $kelurahan = $this->kelurahan->get_total();
         $lahan = $this->lahan->get_all_lahan();
+        $this->data['retail_data']     = $this->retail->get_all_retail();
         $lahan1 = $this->lahan->get_total();
         $jeruk = $this->jeruk->get_total();
         
@@ -32,7 +33,7 @@ class Dashboard extends CI_Controller {
         $this->data['lahan_data']   = $lahan;
         $this->data['total_lahan']   = $lahan1;
         $this->data['total_jeruk']   = $jeruk;
-        $this->data['title']            = 'Dashboard Admin';
+        $this->data['title']            = 'Dashboard';
 
         $this->data['main_view']	= "backend/user/dashboard";
         $this->load->view('backend/public', $this->data);
